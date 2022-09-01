@@ -72,7 +72,7 @@ public class BoolsOpsCompsRandom {
 		//we multiply it by six to get the range from 0-5
 		//we "cast", meaning convert, it to int by using (int)
 		//we add 1 to change the range from 0-5 to 1-6
-		int roll = (int)Math.random()*6+1;
+		int roll = (int)(Math.random()*6+1);
 		print("Our roll is ... "+roll);
 		//if you need a random integer from 1-3, then change 6 to 3
 		//if you need a random integer from 0-5, then remove the "+1"
