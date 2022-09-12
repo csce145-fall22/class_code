@@ -109,9 +109,22 @@ public class WeightCalculator {
 			dailyCaloricIntake *= 1.9;
 			break;
 		}
-		
 		print("Your daily caloric intake to maintain your weight at "
 				+"\n your activity level is :"+dailyCaloricIntake);
+		
+		if(bmi<18.5) {
+			System.out.println("Since your BMI is less than 18.5, you might consider:");
+			print("Eating 500 more calories, "
+					+(dailyCaloricIntake+500) 
+					+"/day, to gain one pound per week.");
+		} else if(bmi >25) {
+			print("Since your BMI is greater than 25, you might consider:");
+			print("Eating 500 fewer calories,"
+					+(dailyCaloricIntake-500)
+					+"/day to lose one pound per week");
+		}else {
+			print("You are at a healthy weight.");
+		}
 		
 		
 	}
