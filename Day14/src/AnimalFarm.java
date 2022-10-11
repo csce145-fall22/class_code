@@ -32,7 +32,10 @@ public class AnimalFarm {
 		chick1.goTo("henhouse");
 		chick2.goTo("henhouse");
 		
-		Animal[] animals = {cow2,cow3,chick1,chick2};
+		Fish bubbles = new Fish();
+		bubbles.setName("Bubbles");
+		
+		Animal[] animals = {cow2,cow3,chick1,chick2,bubbles};
 		
 		System.out.println("Farmer Phil comes outside...");
 		for(Animal a : animals) {

@@ -2,7 +2,7 @@
 public class Animal {
 	private String name;
 	private String species;
-	private String move;
+	protected String move;
 	private String sound;
 	
 	public Animal(String species, String move, String sound) {
