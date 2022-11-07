@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 
 public class AverageApp {
 
@@ -16,6 +17,7 @@ public class AverageApp {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JLabel lblAvgAllOut;
 	/**
 	 * Launch the application.
 	 */
@@ -119,6 +121,26 @@ public class AverageApp {
 			}
 		});
 		panel_2.add(btnNewButton_1);
+		
+		JPanel panel_3 = new JPanel();
+		frame.getContentPane().add(panel_3);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setRows(20);
+		textArea.setColumns(8);
+		textArea.setText("");
+		panel_3.add(textArea);
+		
+		JButton btnNewButton_2 = new JButton("Average List");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		panel_3.add(btnNewButton_2);
+		
+		lblAvgAllOut = new JLabel("<enter some numbers>");
+		panel_3.add(lblAvgAllOut);
 	}
 
 }
