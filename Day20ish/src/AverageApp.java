@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
@@ -134,6 +135,26 @@ public class AverageApp {
 		JButton btnNewButton_2 = new JButton("Average List");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String taInput = textArea.getText();
+				String[] stringNums = taInput.split("\\s");
+				ArrayList<Double> nums = new ArrayList<Double>();
+				for(String sNum : stringNums) {
+					try {
+						double d = Double.parseDouble(sNum);
+						nums.add(d);
+					} catch(Exception e1) {
+						
+					}
+				}
+				double sum = 0.0;
+				for(double d : nums) {
+					sum+=d;
+				}
+				if(nums.size()>0) {
+					lblAvgAllOut.setText("Average = " + sum/nums.size());
+				} else {
+					lblAvgAllOut.setText("Please enter numbers");
+				}
 				
 			}
 		});
