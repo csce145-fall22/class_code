@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,6 +8,8 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
 
 public class ShapesApp {
 
@@ -49,7 +52,7 @@ public class ShapesApp {
 		
 		JTextArea textAreaOut = new JTextArea();
 		textAreaOut.setEditable(false);
-		textAreaOut.setRows(20);
+		textAreaOut.setRows(5);
 		textAreaOut.setColumns(40);
 		frame.getContentPane().add(textAreaOut);
 		
@@ -77,6 +80,13 @@ public class ShapesApp {
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
+		
+		DrawJPanel drawJPanel = new DrawJPanel(null); // PASSED IN NULL
+		drawJPanel.setBackground(Color.WHITE);
+		drawJPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		drawJPanel.setPreferredSize(new Dimension(300,300));
+		frame.getContentPane().add(drawJPanel);
+		
 	}
 
 }
