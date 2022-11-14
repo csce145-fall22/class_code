@@ -7,6 +7,10 @@ import javax.swing.JToggleButton;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -14,6 +18,7 @@ import java.awt.Color;
 public class ShapesApp {
 
 	private JFrame frame;
+	private ArrayList<Shape> shapes;
 
 	/**
 	 * Launch the application.
@@ -59,29 +64,61 @@ public class ShapesApp {
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Circle c0 = new Circle(10,10,5);
-				c0.setID("c0");
-				
-				Rectangle r0 = new Rectangle(20,30, 5, 12);
-				r0.setID("r0");
-				Shape shapes[] = new Shape[10];
-				shapes[0] = c0;
-				shapes[1] = r0;
-				shapes[2] = new Circle(40,50,6);
-				
-				String out = "Shapes:";
-				for(Shape s : shapes) {
-					if(s==null) continue;
-					else {
-						out += "\n"+s.toString();
-					}
-				}
-				textAreaOut.setText(out+tglbtnNewToggleButton.isSelected());
+//				Circle c0 = new Circle(10,10,5);
+//				c0.setID("c0");
+//				
+//				Rectangle r0 = new Rectangle(20,30, 5, 12);
+//				r0.setID("r0");
+//				Shape shapes[] = new Shape[10];
+//				shapes[0] = c0;
+//				shapes[1] = r0;
+//				shapes[2] = new Circle(40,50,6);
+//				
+//				String out = "Shapes:";
+//				for(Shape s : shapes) {
+//					if(s==null) continue;
+//					else {
+//						out += "\n"+s.toString();
+//					}
+//				}
+//				textAreaOut.setText(out+tglbtnNewToggleButton.isSelected());
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
 		
-		DrawJPanel drawJPanel = new DrawJPanel(null); // PASSED IN NULL
+		shapes = new ArrayList<Shape>();
+		
+		
+//		shapes.add( new Circle(10,30,5));
+//		shapes.add( new Circle(30,10,8));
+//		shapes.add( new Rectangle(80, 120, 50, 60));
+		
+		try {
+			FileInputStream fis = new FileInputStream("shapes.txt");
+			Scanner fin = new Scanner(fis);
+			while(fin.hasNext()) {
+				String line = fin.nextLine();
+				String[] tokens = line.split("\\s");
+				String shape = tokens[0];
+				int x = Integer.parseInt(tokens[1]);
+				int y = Integer.parseInt(tokens[2]);
+				if(shape.equals("circle")) {
+					int r = Integer.parseInt(tokens[3]);
+					Circle c = new Circle(x,y,r);
+					shapes.add(c);
+				} else if (shape.equals("rectangle")) {
+					int w = Integer.parseInt(tokens[3]);
+					int h = Integer.parseInt(tokens[4]);
+					Rectangle rect = new Rectangle(x,y,w,h);
+					shapes.add(rect);
+				}
+			}
+		} catch(FileNotFoundException fne) {
+			textAreaOut.setText("shapes.txt file Not Found");
+		} catch(Exception e) {
+			textAreaOut.setText(e.getMessage());
+		}
+		DrawJPanel drawJPanel = new DrawJPanel(shapes); 
 		drawJPanel.setBackground(Color.WHITE);
 		drawJPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		drawJPanel.setPreferredSize(new Dimension(300,300));

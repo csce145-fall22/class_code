@@ -1,5 +1,5 @@
 
-public abstract class Shape {
+public abstract class Shape implements Drawable{
 	private int posX;
 	private int posY;
 	
@@ -29,6 +29,14 @@ public abstract class Shape {
 	
 	private String pos2String() {
 		return "["+posX+","+posY+"]";
+	}
+	
+	public int getX() {
+		return this.posX;
+	}
+	
+	public int getY() {
+		return this.posY;
 	}
 	
 	public String toString() {

@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 
 public class Rectangle extends Shape {
 	private int width=10;
@@ -13,7 +14,23 @@ public class Rectangle extends Shape {
 		this.height=height;
 	}
 	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return this.height;
+	}
+	
 	public String toString() {
 		return super.toString() + " Width: "+width+" Height: "+height;
 	}
+
+	@Override
+	public void drawTo(Graphics g) {
+		g.drawRect(this.getX(), this.getY() , this.getWidth(), this.getHeight());
+		
+	}
+	
+	
 }

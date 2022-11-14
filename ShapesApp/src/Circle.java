@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 
 public class Circle extends Shape {
 	int radius =1;
@@ -13,5 +14,11 @@ public class Circle extends Shape {
 	
 	public String toString() {
 		return super.toString()+" Radius:"+radius;
+	}
+
+	@Override
+	public void drawTo(Graphics g) {
+		g.drawOval(getX(), getY(), 2*radius, 2*radius);
+		
 	}
 }
