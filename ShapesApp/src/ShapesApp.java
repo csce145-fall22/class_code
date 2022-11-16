@@ -112,6 +112,10 @@ public class ShapesApp {
 					int h = Integer.parseInt(tokens[4]);
 					Rectangle rect = new Rectangle(x,y,w,h);
 					shapes.add(rect);
+				} else if(shape.equals("square")) {
+					int w = Integer.parseInt(tokens[3]);
+					Square s = new Square(x,y,w);
+					shapes.add(s);
 				}
 			}
 			fin.close();

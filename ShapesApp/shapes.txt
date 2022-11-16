@@ -1,3 +1,4 @@
 circle 40 50 15
 rectangle 100 200 30 40
 circle 70 20 10
+square 150 200 55
