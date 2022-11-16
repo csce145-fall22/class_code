@@ -7,6 +7,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -120,11 +122,30 @@ public class ShapesApp {
 		} catch(Exception e) {
 			textAreaOut.setText(e.getMessage());
 		}
+		
+		JToggleButton tglbtnStars = new JToggleButton("Stars!!!");
+		tglbtnStars.setSelected(true);
+		frmShapesApp.getContentPane().add(tglbtnStars);
 		DrawJPanel drawJPanel = new DrawJPanel(shapes); 
 		drawJPanel.setBackground(Color.WHITE);
 		drawJPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		drawJPanel.setPreferredSize(new Dimension(300,300));
 		frmShapesApp.getContentPane().add(drawJPanel);
+		
+		drawJPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent me) {
+				System.out.println("Pressed!");
+				if (!tglbtnStars.isSelected())
+					return; //do nothing else
+				int x = me.getX();
+				int y = me.getY();
+				
+				shapes.add(new Star5(x,y));
+				
+				drawJPanel.repaint();
+			}
+		});
 		
 	}
 
