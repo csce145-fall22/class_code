@@ -97,6 +97,7 @@ public class ShapesApp {
 		try {
 			FileInputStream fis = new FileInputStream("shapes.txt");
 			Scanner fin = new Scanner(fis);
+			shapes.add(new Star5(160,170));
 			while(fin.hasNext()) {
 				String line = fin.nextLine();
 				String[] tokens = line.split("\\s");
@@ -118,6 +119,7 @@ public class ShapesApp {
 					shapes.add(s);
 				}
 			}
+			
 			fin.close();
 		} catch(FileNotFoundException fne) {
 			textAreaOut.setText("shapes.txt file Not Found");

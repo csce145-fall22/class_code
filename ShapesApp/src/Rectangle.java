@@ -29,7 +29,6 @@ public class Rectangle extends Shape {
 	@Override
 	public void drawTo(Graphics g) {
 		g.drawRect(this.getX(), this.getY() , this.getWidth(), this.getHeight());
-		
 	}
 	
 	
