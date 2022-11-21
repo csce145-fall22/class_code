@@ -6,8 +6,12 @@ public class Star5 extends Shape {
 	private Point[] pts;
 	
 	public Star5(int x, int y){
+		this(x,y,10);
+	}
+	
+	public Star5(int x, int y, int height){
 		Point c = new Point(x,y);
-		Point top = new Point(x,y-10);
+		Point top = new Point(x,y-height);
 		
 		pts = new Point[5];
 		

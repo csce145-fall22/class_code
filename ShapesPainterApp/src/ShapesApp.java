@@ -19,6 +19,8 @@ import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ShapesApp {
 
@@ -27,6 +29,11 @@ public class ShapesApp {
 	private JTextArea textAreaOut;
 	private ButtonGroup bgShape = new ButtonGroup();
 	private JRadioButton[] rdbuttons = new JRadioButton[4];
+	private JTextField textFieldWidth;
+	private JTextField textFieldHeight;
+	private JTextField textFieldRed;
+	private JTextField textFieldGreen;
+	private JTextField textFieldBlue;
 
 	/**
 	 * Launch the application.
@@ -60,31 +67,6 @@ public class ShapesApp {
 		frmShapesApp.setBounds(100, 100, 403, 586);
 		frmShapesApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmShapesApp.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				Circle c0 = new Circle(10,10,5);
-//				c0.setID("c0");
-//				
-//				Rectangle r0 = new Rectangle(20,30, 5, 12);
-//				r0.setID("r0");
-//				Shape shapes[] = new Shape[10];
-//				shapes[0] = c0;
-//				shapes[1] = r0;
-//				shapes[2] = new Circle(40,50,6);
-//				
-//				String out = "Shapes:";
-//				for(Shape s : shapes) {
-//					if(s==null) continue;
-//					else {
-//						out += "\n"+s.toString();
-//					}
-//				}
-//				textAreaOut.setText(out+tglbtnNewToggleButton.isSelected());
-			}
-		});
-		frmShapesApp.getContentPane().add(btnNewButton);
 		
 		shapes = new ArrayList<Shape>();
 		
@@ -120,6 +102,25 @@ public class ShapesApp {
 			textAreaOut.setText(e.getMessage());
 		}
 		
+		JPanel panel_1 = new JPanel();
+		frmShapesApp.getContentPane().add(panel_1);
+		
+		JLabel lblNewLabel = new JLabel("Width/Radius:");
+		panel_1.add(lblNewLabel);
+		
+		textFieldWidth = new JTextField();
+		textFieldWidth.setText("20");
+		panel_1.add(textFieldWidth);
+		textFieldWidth.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Height");
+		panel_1.add(lblNewLabel_1);
+		
+		textFieldHeight = new JTextField();
+		textFieldHeight.setText("10");
+		panel_1.add(textFieldHeight);
+		textFieldHeight.setColumns(10);
+		
 		JPanel panel = new JPanel();
 		frmShapesApp.getContentPane().add(panel);
 		
@@ -146,6 +147,32 @@ public class ShapesApp {
 		rdbuttons[2]=rdbtnCircle;
 		rdbuttons[3]=rdbtnSquare;
 		
+		JPanel panel_2 = new JPanel();
+		frmShapesApp.getContentPane().add(panel_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("Color");
+		panel_2.add(lblNewLabel_2);
+		
+		textFieldRed = new JTextField();
+		textFieldRed.setBackground(Color.RED);
+		textFieldRed.setText("0");
+		textFieldRed.setForeground(Color.WHITE);
+		panel_2.add(textFieldRed);
+		textFieldRed.setColumns(4);
+		
+		textFieldGreen = new JTextField();
+		textFieldGreen.setBackground(Color.GREEN);
+		textFieldGreen.setText("0");
+		panel_2.add(textFieldGreen);
+		textFieldGreen.setColumns(4);
+		
+		textFieldBlue = new JTextField();
+		textFieldBlue.setForeground(Color.WHITE);
+		textFieldBlue.setBackground(Color.BLUE);
+		textFieldBlue.setText("0");
+		panel_2.add(textFieldBlue);
+		textFieldBlue.setColumns(4);
+		
 		DrawJPanel drawJPanel = new DrawJPanel(shapes); 
 		drawJPanel.setBackground(Color.WHITE);
 		drawJPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -167,15 +194,23 @@ public class ShapesApp {
 				int y = me.getY();
 				
 //				shapes.add(new Star5(x,y));
-				Shape s = null;
-				if(rdbtnCircle.isSelected()) {
-					s= new Circle(x,y,10);
-				} else if (rdbtnRectangle.isSelected()) {
-					s= new Rectangle(x,y,15,40);
-				} else if( rdbtnSquare.isSelected()) {
-					s= new Square(x,y,14);
-				} else if (rdbtnStar.isSelected()) {
-					s = new Star5(x,y);
+				try {
+					int w = Integer.parseInt(textFieldWidth.getText());
+					int ht = Integer.parseInt(textFieldHeight.getText());
+					Shape s = null;
+					if(rdbtnCircle.isSelected()) {
+						s= new Circle(x,y,w);
+					} else if (rdbtnRectangle.isSelected()) {
+						s= new Rectangle(x,y,w,ht);
+					} else if( rdbtnSquare.isSelected()) {
+						s= new Square(x,y,w);
+					} else if (rdbtnStar.isSelected()) {
+						s = new Star5(x,y,w);
+					}
+					
+					shapes.add(s);
+				} catch (NumberFormatException nfe) {
+					textAreaOut.setText("Width and Height should be numbers!");
 				}
 				
 				drawJPanel.repaint();
